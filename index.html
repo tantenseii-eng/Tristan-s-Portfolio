@@ -1,0 +1,860 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tristan Jay Fantilaga's personal portfolio.">
+    <title>Tristan Jay Fantilaga | Portfolio</title>
+
+    <style>
+        :root {
+            --bg: #080b12;
+            --surface: #101722;
+            --surface-hover: #151f2d;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --accent: #60a5fa;
+            --border: #253143;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(8, 11, 18, 0.96);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-content {
+            min-height: 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 6px 12px;
+            font-size: 21px;
+            cursor: pointer;
+        }
+
+        .hero {
+            min-height: 85vh;
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr;
+            align-items: center;
+            gap: 55px;
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+
+        .intro {
+            color: var(--accent);
+            font-size: 13px;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.12;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: var(--accent);
+        }
+
+        .hero h2 {
+            color: var(--muted);
+            font-size: clamp(19px, 3vw, 27px);
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 550px;
+            color: var(--muted);
+            margin-bottom: 30px;
+        }
+
+        .profile-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-image {
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center 25%;
+            border: 3px solid var(--accent);
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 22px;
+            border: 1px solid var(--accent);
+            border-radius: 5px;
+            color: var(--accent);
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+            margin-right: 8px;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        section {
+            padding: 85px 0;
+            border-top: 1px solid var(--border);
+            scroll-margin-top: 70px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        .section-number {
+            color: var(--accent);
+            font-size: 17px;
+            margin-right: 8px;
+        }
+
+        .description {
+            max-width: 750px;
+            color: var(--muted);
+        }
+
+        .about-content {
+            max-width: 780px;
+        }
+
+        .about-content p {
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .education-list,
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .education-card,
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+        .education-card:hover,
+        .project-card:hover {
+            border-color: var(--accent);
+            background: var(--surface-hover);
+            transform: translateY(-4px);
+        }
+
+        .education-card h3,
+        .project-card h3 {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .education-card p,
+        .project-card p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .date {
+            color: var(--accent);
+            font-size: 13px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .skill {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 10px 18px;
+            border-radius: 5px;
+            color: var(--muted);
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .project-tech {
+            color: var(--accent);
+            font-size: 12px;
+            word-spacing: 6px;
+        }
+
+        .language-list {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .language-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            padding: 22px;
+            transition: 0.3s;
+        }
+
+        .language-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .language-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .language-card p {
+            color: var(--accent);
+            font-size: 13px;
+        }
+
+        .contact {
+            text-align: center;
+        }
+
+        .contact p {
+            color: var(--muted);
+            max-width: 550px;
+            margin: 0 auto 30px;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .socials a {
+            border: 1px solid var(--border);
+            padding: 10px 18px;
+            border-radius: 5px;
+            color: var(--muted);
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .socials a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 25px 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 950px) {
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .nav-content {
+                min-height: 68px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 68px;
+                left: 0;
+                width: 100%;
+                padding: 20px 5%;
+                background: var(--surface);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 15px;
+                display: block;
+                padding: 4px 0;
+            }
+
+            .hero {
+                min-height: auto;
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 35px;
+                padding-top: 55px;
+                padding-bottom: 65px;
+            }
+
+            .profile-wrapper {
+                order: -1;
+            }
+
+            .profile-image {
+                max-width: 220px;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero h1 {
+                font-size: clamp(38px, 9vw, 55px);
+            }
+
+            section {
+                padding: 65px 0;
+            }
+
+            .education-list,
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .language-list {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 25px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .btn {
+                padding: 10px 13px;
+                font-size: 12px;
+            }
+
+            .socials a {
+                padding: 9px 12px;
+                font-size: 12px;
+            }
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="container nav-content">
+
+            <a href="#home" class="logo">Tan</a>
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                aria-controls="navLinks">
+                ☰
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#objective">Objective</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#languages">Languages</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <main>
+
+        <header class="container hero" id="home">
+
+            <div class="hero-content">
+
+                <div class="intro">HELLO, I'M</div>
+
+                <h1>
+                    Tristan Jay<br>
+                    <span class="highlight">Fantilaga.</span>
+                </h1>
+
+                <h2>IT Student & Aspiring Developer</h2>
+
+                <p>
+                    I'm interested in technology, programming,
+                    and building applications that solve real-world
+                    problems. I'm always looking for opportunities
+                    to learn and improve my skills.
+                </p>
+
+                <a href="#projects" class="btn btn-primary">
+                    View My Projects
+                </a>
+
+                <a href="#contact" class="btn">
+                    Contact Me
+                </a>
+
+            </div>
+
+            <div class="profile-wrapper">
+                <img
+                    src="Tristan.jpg"
+                    alt="Portrait of Tristan Jay Fantilaga"
+                    class="profile-image">
+            </div>
+
+        </header>
+
+        <section id="about">
+            <div class="container">
+
+                <h2 class="section-title">
+                    <span class="section-number">01.</span>
+                    About Me
+                </h2>
+
+                <div class="about-content">
+
+                    <p>
+                        I'm an Information Technology student
+                        with an interest in software development
+                        and web technologies.
+                    </p>
+
+                    <p>
+                        I enjoy exploring different technologies,
+                        working on programming projects, and
+                        applying what I've learned to practical
+                        applications.
+                    </p>
+
+                    <p>
+                        I'm continuously working to improve
+                        my technical skills and gain more
+                        experience in the field of technology.
+                    </p>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="objective">
+            <div class="container">
+
+                <h2 class="section-title">
+                    <span class="section-number">02.</span>
+                    Career Objective
+                </h2>
+
+                <div class="about-content">
+
+                    <p>
+                        As an Information Technology student,
+                        I am looking for an opportunity to apply
+                        the knowledge and skills I have gained
+                        through my studies, particularly in
+                        programming and software development.
+                        I am willing to learn new technologies,
+                        improve my technical abilities, and gain
+                        hands-on experience. I hope to contribute
+                        to a team, take on new challenges, and grow
+                        professionally while developing useful
+                        and reliable software solutions.
+                    </p>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <div class="container">
+
+                <h2 class="section-title">
+                    <span class="section-number">03.</span>
+                    Education
+                </h2>
+
+                <div class="education-list">
+
+                    <article class="education-card">
+
+                        <h3>
+                            Bachelor of Science in
+                            Information Technology
+                        </h3>
+
+                        <p>Filamer Christian University</p>
+
+                        <div class="date">
+                            2024 – Present
+                        </div>
+
+                    </article>
+
+                    <article class="education-card">
+
+                        <h3>
+                            Science, Technology, Engineering,
+                            and Mathematics (STEM)
+                        </h3>
+
+                        <p>Filamer Christian University</p>
+
+                        <div class="date">
+                            2021 – 2024
+                        </div>
+
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+
+                <h2 class="section-title">
+                    <span class="section-number">04.</span>
+                    Technical Skills
+                </h2>
+
+                <p class="description">
+                    Programming languages, frameworks,
+                    and tools I've worked with.
+                </p>
+
+                <div class="skills">
+                    <span class="skill">HTML</span>
+                    <span class="skill">CSS</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">Python</span>
+                    <span class="skill">Django</span>
+                    <span class="skill">PostgreSQL</span>
+                    <span class="skill">OpenCV</span>
+                    <span class="skill">MediaPipe</span>
+                    <span class="skill">Git</span>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+
+                <h2 class="section-title">
+                    <span class="section-number">05.</span>
+                    My Projects
+                </h2>
+
+                <div class="projects">
+
+                    <article class="project-card">
+
+                        <h3>Hand Tracking Puzzle</h3>
+
+                        <p>
+                            A computer vision project that allows
+                            users to interact with puzzle pieces
+                            using hand gestures and camera tracking.
+                        </p>
+
+                        <div class="project-tech">
+                            PYTHON · OPENCV · MEDIAPIPE
+                        </div>
+
+                    </article>
+
+                    <article class="project-card">
+
+                        <h3>Management System</h3>
+
+                        <p>
+                            A web-based management application
+                            featuring database integration,
+                            menu management, and administrative tools.
+                        </p>
+
+                        <div class="project-tech">
+                            PYTHON · DJANGO · POSTGRESQL
+                        </div>
+
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="languages">
+            <div class="container">
+
+                <h2 class="section-title">
+                    <span class="section-number">06.</span>
+                    Languages
+                </h2>
+
+                <div class="language-list">
+
+                    <article class="language-card">
+                        <h3>Ilonggo</h3>
+                        <p>Mother Tongue</p>
+                    </article>
+
+                    <article class="language-card">
+                        <h3>Tagalog</h3>
+                        <p>Intermediate</p>
+                    </article>
+
+                    <article class="language-card">
+                        <h3>English</h3>
+                        <p>Intermediate</p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container contact">
+
+                <h2 class="section-title">
+                    <span class="section-number">07.</span>
+                    Get In Touch
+                </h2>
+
+                <p>
+                    Interested in working together or simply
+                    want to connect? Feel free to reach out
+                    through my social media accounts.
+                </p>
+
+                <div class="socials">
+
+                    <a
+                        href="https://web.facebook.com/tristan.jay.fantilaga.2024"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        Facebook ↗
+                    </a>
+
+                    <a
+                        href="https://github.com/tantenseii-eng"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        GitHub ↗
+                    </a>
+
+                    <a
+                        href="https://www.instagram.com/aelbyuh/"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        Instagram ↗
+                    </a>
+
+                    <a
+                        href="https://www.linkedin.com/in/tristan-jay-fantilaga-4b843b451/"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        LinkedIn ↗
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+
+            <p>Designed & Built by Tristan Jay Fantilaga</p>
+
+            <p>
+                © <span id="year"></span> All Rights Reserved.
+            </p>
+
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.getElementById("navLinks");
+
+        function closeMenu() {
+            navLinks.classList.remove("active");
+
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.setAttribute(
+                "aria-label",
+                "Open navigation menu"
+            );
+
+            menuToggle.textContent = "☰";
+        }
+
+        menuToggle.addEventListener("click", () => {
+
+            const isOpen = navLinks.classList.toggle("active");
+
+            menuToggle.setAttribute("aria-expanded", isOpen);
+
+            menuToggle.setAttribute(
+                "aria-label",
+                isOpen ? "Close navigation menu" : "Open navigation menu"
+            );
+
+            menuToggle.textContent = isOpen ? "✕" : "☰";
+
+        });
+
+        document.querySelectorAll(".nav-links a").forEach(link => {
+            link.addEventListener("click", closeMenu);
+        });
+    </script>
+
+</body>
+</html>
